@@ -27,17 +27,17 @@ class App extends React.Component<IAppProps, IAppState> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response=> response.json())
       .then(users => {this.setState({ robots: users})});
   }
 
   onSearchChange = (event: React.FormEvent) => {
-    this.setState({ searchfield: event.currentTarget.value })
+    this.setState({ searchfield: (event.target as HTMLInputElement).value})
   }
 
-  render() {
+  render(): JSX.Element {
     const { robots, searchfield } = this.state;
     const filteredRobots = robots.filter(robot =>{
       return robot.name.toLowerCase().includes(searchfield.toLowerCase());
